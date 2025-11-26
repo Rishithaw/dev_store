@@ -1,10 +1,17 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+
   def index
-    @products = Product.all
+    @categories = Category.all
+
+    if params[:category_id].present?
+      @products = Product.where(category_id: params[:category_id])
+    else
+      @products = Product.all
+    end
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def new
@@ -21,11 +28,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to @product, notice: "Product updated!"
     else
@@ -34,14 +39,22 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path, notice: "Product deleted!"
   end
 
   private
 
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
   def product_params
-    params.require(:product).permit(:name, :description, :base_price, :image_url, :category)
+    params.require(:product).permit(
+      :name, :description, :base_price, :image_url,
+      :category_id, :stock_quantity, :product_type,
+      :on_sale, :sale_price, :featured,
+      :digital_file_url, :digital_file_size
+    )
   end
 end
