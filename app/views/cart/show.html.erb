@@ -28,7 +28,23 @@
           </td>
 
           <td style="padding: 8px; border-bottom: 1px solid #eee;">
-            <%= item.quantity %>
+
+            <!-- decrease button -->
+            <%= button_to "-", cart_decrease_path(item.product.id),
+                          method: :post,
+                          form_class: "inline-button",
+                          class: "btn btn-secondary",
+                          style: "display:inline;" %>
+
+            <span style="margin: 0 10px;"><%= item.quantity %></span>
+
+            <!-- increase button -->
+            <%= button_to "+", cart_increase_path(item.product.id),
+                          method: :post,
+                          form_class: "inline-button",
+                          class: "btn btn-secondary",
+                          style: "display:inline;" %>
+
           </td>
 
           <td style="padding: 8px; border-bottom: 1px solid #eee;">
