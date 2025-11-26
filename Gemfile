@@ -64,3 +64,4 @@ end
 gem 'bcrypt', '~> 3.1.7'
 gem 'activeadmin'
 gem 'devise'
+gem 'faker'
