@@ -1,2 +1,7 @@
-<h1>Admin::Products#edit</h1>
-<p>Find me in app/views/admin/products/edit.html.erb</p>
+<h1>Edit Product</h1>
+
+<%= render "form", product: @product %>
+
+<br>
+
+<%= link_to "Back to Products", admin_products_path %>

@@ -1,0 +1,55 @@
+<%= form_with model: [:admin, product] do |f| %>
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :base_price %><br>
+    <%= f.number_field :base_price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :category_id, "Category" %><br>
+    <%= f.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= f.label :product_type %><br>
+    <%= f.select :product_type, ["physical", "digital"] %>
+  </div>
+
+  <div>
+    <%= f.label :on_sale %>
+    <%= f.check_box :on_sale %>
+  </div>
+
+  <div>
+    <%= f.label :sale_price %><br>
+    <%= f.number_field :sale_price, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :stock_quantity %><br>
+    <%= f.number_field :stock_quantity %>
+  </div>
+
+  <div>
+    <%= f.label :digital_file_url %><br>
+    <%= f.text_field :digital_file_url %>
+  </div>
+
+  <div>
+    <%= f.label :digital_file_size %><br>
+    <%= f.number_field :digital_file_size %>
+  </div>
+
+  <br>
+
+  <%= f.submit %>
+<% end %>
