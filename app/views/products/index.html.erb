@@ -26,6 +26,11 @@
     </div>
     <hr>
   <% end %>
+
+  <div class="pagination">
+    <%= paginate @products %>
+  </div>
+
 <% else %>
   <p>No products found in this category.</p>
 <% end %>

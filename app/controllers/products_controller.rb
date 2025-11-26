@@ -4,11 +4,16 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.all
 
+    # Starts with ordered list
+    @products = Product.order(created_at: :desc)
+
+    # Category filter
     if params[:category_id].present?
-      @products = Product.where(category_id: params[:category_id])
-    else
-      @products = Product.all
+      @products = @products.where(category_id: params[:category_id])
     end
+
+    # Applies pagination LAST so it paginates the filtered relation
+    @products = @products.page(params[:page]).per(12)
   end
 
   def show
