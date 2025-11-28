@@ -1,6 +1,8 @@
 ActiveAdmin.register Product do
+  permit_params :name, :description, :base_price, :category_id, :product_type, :stock_quantity, :on_sale, :sale_price, :featured,
+                :digital_file_url,
+                :digital_file_size
 
-  # Filters (optional)
   filter :name
   filter :category
   filter :product_type
@@ -8,7 +10,6 @@ ActiveAdmin.register Product do
   filter :featured
   filter :created_at
 
-  # Admin index table
   index do
     selectable_column
     id_column
@@ -16,11 +17,12 @@ ActiveAdmin.register Product do
     column :base_price
     column :product_type
     column :category
-    column :created_at
-    actions   # View / Edit / Delete
+    column :stock_quantity, sortable: :stock_quantity
+    column :on_sale
+    column :featured
+    actions
   end
 
-  # Show page
   show do
     attributes_table do
       row :id
@@ -40,21 +42,56 @@ ActiveAdmin.register Product do
     end
   end
 
-  # New/Edit form
   form do |f|
     f.inputs do
       f.input :name
       f.input :description
       f.input :base_price
       f.input :category
-      f.input :product_type, as: :select, collection: ["physical", "digital"]
-      f.input :stock_quantity
+      f.input :product_type,
+              as: :select,
+              collection: ["physical", "digital"],
+              input_html: { id: "product_type_select" }
+
+
+      f.input :stock_quantity, wrapper_html: { id: "stock_quantity_field" }
+
       f.input :on_sale
       f.input :sale_price
       f.input :featured
-      f.input :digital_file_url
-      f.input :digital_file_size
+
+      f.input :digital_file_url, wrapper_html: { id: "digital_file_url_field" }
+      f.input :digital_file_size, wrapper_html: { id: "digital_file_size_field" }
     end
+
     f.actions
+  end
+
+  config.clear_sidebar_sections!
+
+  sidebar :help, only: [:new, :edit] do
+    script do
+      raw <<-JS
+        document.addEventListener("DOMContentLoaded", function() {
+          function toggleFields() {
+            var type = document.querySelector("#product_type_select").value;
+
+            document.querySelector("#stock_quantity_field").style.display =
+              type === "physical" ? "block" : "none";
+
+            document.querySelector("#digital_file_url_field").style.display =
+              type === "digital" ? "block" : "none";
+            document.querySelector("#digital_file_size_field").style.display =
+              type === "digital" ? "block" : "none";
+          }
+
+          toggleFields();
+
+          document
+            .querySelector("#product_type_select")
+            .addEventListener("change", toggleFields);
+        });
+      JS
+    end
   end
 end
