@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
+    @products = Product.all
     @categories = Category.all
 
     # Start with all products, paginated
@@ -22,7 +23,9 @@ class ProductsController < ApplicationController
     @products = @products.page(params[:page]).per(12)
   end
 
-  def show; end
+  def show
+    @product = Product.find(params[:id])
+  end
 
   def new
     @product = Product.new
@@ -63,7 +66,7 @@ class ProductsController < ApplicationController
       :name, :description, :base_price, :image_url,
       :category_id, :stock_quantity, :product_type,
       :on_sale, :sale_price, :featured,
-      :digital_file_url, :digital_file_size
+      :digital_file_url, :digital_file_size, :image
     )
   end
 end

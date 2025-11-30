@@ -4,14 +4,11 @@
 
 <%= form_with url: products_path, method: :get, local: true, class: "mb-4" do %>
   <div style="display: flex; gap: 10px; align-items: center;">
-
-    <!-- Keyword Search -->
     <%= text_field_tag :keyword, params[:keyword],
         placeholder: "Search by name or description...",
         class: "form-control",
         style: "flex: 1;" %>
 
-    <!-- Category Dropdown -->
     <%= select_tag :search_category_id,
         options_for_select(
           [["All Categories", ""]] + @categories.map { |c| [c.name, c.id] },
@@ -26,19 +23,41 @@
 
 <hr>
 
-<!-- Product List -->
 <% if @products.any? %>
-  <% @products.each do |product| %>
-    <div style="margin-bottom: 20px;">
-      <h2><%= link_to product.name, product_path(product) %></h2>
-      <p><strong>Category:</strong> <%= product.category.name %></p>
-      <p><strong>Price:</strong> $<%= product.price %></p>
-      <p><%= truncate(product.description, length: 120) %></p>
-    </div>
-    <hr>
-  <% end %>
 
-  <div class="pagination">
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px;">
+
+    <% @products.each do |product| %>
+      <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+
+        <!-- IMAGE with fallback -->
+        <% if product.image.attached? %>
+          <%= link_to image_tag(
+                product.image.variant(resize_to_limit: [200, 200]),
+                style: "width: 100%; height: auto; object-fit: contain;"
+              ), product_path(product) %>
+        <% else %>
+          <%= link_to image_tag(
+                asset_path("Placeholder.jpg"),
+      style: "width: 150px; height: 150px; object-fit: cover;"
+              ), product_path(product) %>
+        <% end %>
+
+        <h3 class="mt-2">
+          <%= link_to product.name, product_path(product) %>
+        </h3>
+
+        <p><strong>Category:</strong> <%= product.category&.name %></p>
+        <p><strong>Price:</strong> $<%= product.price %></p>
+
+        <p><%= truncate(product.description, length: 90) %></p>
+
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="pagination mt-4">
     <%= paginate @products %>
   </div>
 
