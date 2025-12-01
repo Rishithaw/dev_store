@@ -11,5 +11,5 @@ class User < ApplicationRecord
        validates :first_name, presence: true
        validates :last_name, presence: true
 
-       validates :is_admin, inclusion: { in: [true, false] }
+       validates :is_admin, inclusion: { in: [ true, false ] }
 end

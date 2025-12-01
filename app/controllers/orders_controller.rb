@@ -3,8 +3,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!
 
   # Ensure customer can only access THEIR orders
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_order!, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [ :show, :edit, :update, :destroy ]
+  before_action :authorize_order!, only: [ :show, :edit, :update, :destroy ]
 
   # GET /orders
   # Shows all orders for the currently logged-in customer

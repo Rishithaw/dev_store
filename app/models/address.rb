@@ -8,5 +8,5 @@ class Address < ApplicationRecord
                           format: { with: /\A[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d\z/,
                                     message: "must be a valid Canadian postal code" }
 
-  validates :is_default, inclusion: { in: [true, false] }
+  validates :is_default, inclusion: { in: [ true, false ] }
 end

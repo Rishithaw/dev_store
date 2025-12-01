@@ -15,8 +15,8 @@ class Product < ApplicationRecord
 
   validates :product_type, presence: true
 
-  validates :on_sale, inclusion: { in: [true, false] }
-  validates :featured, inclusion: { in: [true, false] }
+  validates :on_sale, inclusion: { in: [ true, false ] }
+  validates :featured, inclusion: { in: [ true, false ] }
 
   validates :sale_price,
             numericality: { greater_than_or_equal_to: 0 },
@@ -36,7 +36,7 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["category"]
+    [ "category" ]
   end
   def price
     on_sale? && sale_price.present? ? sale_price : base_price

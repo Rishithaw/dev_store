@@ -1,7 +1,6 @@
 require "ostruct"
 
 class CartController < ApplicationController
-
   def show
     session[:cart] ||= {}
     @cart_items = session[:cart].map do |product_id, quantity|
@@ -53,5 +52,4 @@ class CartController < ApplicationController
 
     redirect_to cart_path
   end
-
 end
