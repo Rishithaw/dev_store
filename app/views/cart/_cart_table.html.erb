@@ -1,0 +1,17 @@
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="padding: 8px; border-bottom: 1px solid #ccc;">Product</th>
+      <th style="padding: 8px; border-bottom: 1px solid #ccc;">Price</th>
+      <th style="padding: 8px; border-bottom: 1px solid #ccc;">Quantity</th>
+      <th style="padding: 8px; border-bottom: 1px solid #ccc;">Total</th>
+      <th style="padding: 8px; border-bottom: 1px solid #ccc;">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cart_items.each do |item| %>
+      <%= render "cart/cart_row", item: item %>
+    <% end %>
+  </tbody>
+</table>

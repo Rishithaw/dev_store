@@ -1,0 +1,19 @@
+<%= form_with url: products_path, method: :get, local: true, class: "mb-4" do %>
+  <div style="display: flex; gap: 10px; align-items: center;">
+
+    <%= text_field_tag :keyword, params[:keyword],
+        placeholder: "Search by name or description...",
+        class: "form-control",
+        style: "flex: 1;" %>
+
+    <%= select_tag :search_category_id,
+        options_for_select(
+          [["All Categories", ""]] + @categories.map { |c| [c.name, c.id] },
+          params[:search_category_id]
+        ),
+        class: "form-select",
+        style: "width: 200px;" %>
+
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  </div>
+<% end %>

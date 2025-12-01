@@ -1,5 +1,9 @@
 <h1><%= @product.name %></h1>
 
+<div style="text-align: right; margin-bottom: 10px;">
+  <%= render "shared/auth_links" %>
+</div>
+
 <div style="max-width: 400px;">
   <% if @product.image_url.present? %>
     <img src="<%= @product.image_url %>" alt="<%= @product.name %>" style="width: 100%; border-radius: 8px;">

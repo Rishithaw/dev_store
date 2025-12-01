@@ -1,0 +1,24 @@
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+
+  <% if product.image.attached? %>
+    <%= link_to image_tag(
+          product.image.variant(resize_to_limit: [200, 200]),
+          style: "width: 100%; height: auto; object-fit: contain;"
+        ), product_path(product) %>
+  <% else %>
+    <%= link_to image_tag(
+          asset_path("Placeholder.jpg"),
+          style: "width: 150px; height: 150px; object-fit: cover;"
+        ), product_path(product) %>
+  <% end %>
+
+  <h3 class="mt-2">
+    <%= link_to product.name, product_path(product) %>
+  </h3>
+
+  <p><strong>Category:</strong> <%= product.category&.name %></p>
+  <p><strong>Price:</strong> $<%= product.price %></p>
+
+  <p><%= truncate(product.description, length: 90) %></p>
+
+</div>

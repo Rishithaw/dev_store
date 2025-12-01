@@ -1,0 +1,20 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<div>
+  <%= f.label :username %><br>
+  <%= f.text_field :username, required: true %>
+</div>
+
+<hr>
+
+<%= render "devise/registrations/shipping_fields", f: f %>
+
+<hr>
+
+<%= render "devise/registrations/account_fields",
+           f: f,
+           show_min_length: local_assigns[:show_min_length],
+           edit_mode: local_assigns[:edit_mode] %>
+
+<br>
+<%= f.submit local_assigns[:submit_text] %>

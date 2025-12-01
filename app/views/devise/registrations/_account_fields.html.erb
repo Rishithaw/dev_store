@@ -1,0 +1,29 @@
+<h3>Login Credentials</h3>
+
+<div>
+  <%= f.label :email %><br>
+  <%= f.email_field :email, required: true %>
+</div>
+
+<div>
+  <%= f.label :password %>
+  <% if local_assigns[:show_min_length] && @minimum_password_length %>
+    <em>(minimum <%= @minimum_password_length %> characters)</em>
+  <% elsif local_assigns[:edit_mode] %>
+    <i>(leave blank if you don't want to change it)</i>
+  <% end %>
+  <br>
+  <%= f.password_field :password, autocomplete: "new-password" %>
+</div>
+
+<div>
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+</div>
+
+<% if local_assigns[:edit_mode] %>
+  <div>
+    <%= f.label :current_password %><br>
+    <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
+  </div>
+<% end %>

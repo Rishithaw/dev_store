@@ -1,0 +1,32 @@
+<tr>
+  <td><%= link_to item.product.name, product_path(item.product) %></td>
+
+  <td>$<%= item.product.price %></td>
+
+  <td>
+    <%# decrease button %>
+    <%= button_to "-", cart_decrease_path(item.product.id),
+            method: :post,
+            form_class: "inline-button",
+            class: "btn btn-secondary",
+            style: "display:inline;" %>
+
+    <span style="margin: 0 10px;"><%= item.quantity %></span>
+
+    <%# increase button %>
+    <%= button_to "+", cart_increase_path(item.product.id),
+            method: :post,
+            form_class: "inline-button",
+            class: "btn btn-secondary",
+            style: "display:inline;" %>
+  </td>
+
+  <td>$<%= item.total_price %></td>
+
+  <td>
+    <%= button_to "Remove",
+          cart_remove_path(item.product.id),
+          method: :post,
+          class: "btn btn-danger" %>
+  </td>
+</tr>
