@@ -1,0 +1,26 @@
+form {
+  label {
+    color: $medium-gray;
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    border: 1px solid $border-gray;
+    border-radius: $radius;
+    padding: 0.6rem;
+
+    &:focus {
+      border-color: $primary-blue;
+      background: $off-white;
+      box-shadow: 0 0 0 3px rgba($primary-blue, 0.15);
+    }
+
+    &::placeholder {
+      color: $light-gray;
+    }
+  }
+
+  .field-error {
+    border-color: $danger-red;
+  }
+}

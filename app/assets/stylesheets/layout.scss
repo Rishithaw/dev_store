@@ -1,0 +1,20 @@
+body {
+  background: $off-white;
+  color: $medium-gray;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar {
+  background: $white;
+  border-bottom: 1px solid $border-gray;
+
+  a {
+    color: $dark-gray;
+    font-weight: 500;
+
+    &:hover {
+      color: $primary-blue;
+      background: $background-gray;
+    }
+  }
+}

@@ -68,3 +68,4 @@ gem 'faker'
 gem "kaminari"
 gem "image_processing", "~> 1.2"
 gem "jquery-rails"
+gem "jsbundling-rails", "~> 1.3"

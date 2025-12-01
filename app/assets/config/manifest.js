@@ -2,5 +2,6 @@
 //= link_tree ../builds
 //= link_directory ../stylesheets .css
 
+//= link application.css
 //= link active_admin.css
 //= link active_admin.js

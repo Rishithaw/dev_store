@@ -1,0 +1,26 @@
+.product-card {
+  background: $white;
+  border: 1px solid $border-gray;
+  border-radius: $radius;
+  transition: $transition;
+  padding: $padding-base;
+
+  &:hover {
+    background: $background-gray;
+    transform: translateY(-3px);
+  }
+
+  .title {
+    color: $dark-gray;
+    font-weight: 600;
+  }
+
+  .description {
+    color: $medium-gray;
+  }
+
+  .price {
+    color: $primary-blue;
+    font-weight: bold;
+  }
+}

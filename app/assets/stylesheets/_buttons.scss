@@ -1,0 +1,29 @@
+// Base button
+.btn-base {
+  border-radius: $radius;
+  padding: 0.6rem 1.2rem;
+  transition: $transition;
+  font-weight: 500;
+}
+
+// Primary Button
+.btn-primary-custom {
+  @extend .btn-base;
+  background: $primary-blue;
+  color: $white;
+
+  &:hover {
+    background: $primary-blue-dark;
+  }
+}
+
+// Danger Button
+.btn-danger-custom {
+  @extend .btn-base;
+  background: $danger-red;
+  color: $white;
+
+  &:hover {
+    background: darken($danger-red, 7%);
+  }
+}

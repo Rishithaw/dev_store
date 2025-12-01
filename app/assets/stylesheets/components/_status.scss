@@ -1,0 +1,10 @@
+.status {
+  padding: 0.4rem 0.7rem;
+  border-radius: $radius;
+  font-weight: 500;
+  color: $white;
+
+  &.pending { background: $warning-orange; color: $dark-gray; }
+  &.paid { background: $success-green; }
+  &.shipped { background: $info-cyan; }
+}
