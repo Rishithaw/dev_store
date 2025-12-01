@@ -12,7 +12,10 @@ class Order < ApplicationRecord
   validates :subtotal, :gst, :pst, :hst, :total,
             numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
-  validates :shipping_street, :shipping_city, :shipping_postal_code, presence: true
+  validates :shipping_street, :shipping_city, presence: true
+  validates :shipping_postal_code,
+            presence: true,
+            format: { with: /\A[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d\z/ }
 
   # Callback that ensures totals are always correct
   before_save :calculate_totals

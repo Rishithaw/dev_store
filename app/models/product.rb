@@ -2,6 +2,30 @@ class Product < ApplicationRecord
   has_one_attached :image
   belongs_to :category
 
+   validates :name, presence: true
+  validates :description, presence: true
+
+  validates :base_price,
+            presence: true,
+            numericality: { greater_than_or_equal_to: 0 }
+
+  validates :stock_quantity,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  validates :product_type, presence: true
+
+  validates :on_sale, inclusion: { in: [true, false] }
+  validates :featured, inclusion: { in: [true, false] }
+
+  validates :sale_price,
+            numericality: { greater_than_or_equal_to: 0 },
+            allow_nil: true
+
+  validates :digital_file_size,
+            numericality: { greater_than_or_equal_to: 0 },
+            allow_nil: true
+
   def self.ransackable_attributes(auth_object = nil)
     [
       "name", "description", "base_price", "category_id",

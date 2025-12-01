@@ -5,6 +5,7 @@ class OrderProduct < ApplicationRecord
   validates :quantity, numericality: { greater_than: 0 }
   validates :product_price_at_purchase,
             numericality: { greater_than_or_equal_to: 0 }
+  validates :product_name_at_purchase, presence: true
 
   # Automatically set fields based on product data
   before_validation :set_purchase_details
