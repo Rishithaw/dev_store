@@ -35,7 +35,7 @@
 
     <!-- Clear Filters -->
     <% if params[:keyword].present? || params[:search_category_id].present? || params[:filter].present? %>
-      <div>
+      <div style="align-self: end;" >
         <%= link_to "Clear Filters", products_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
