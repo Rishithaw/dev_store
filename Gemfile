@@ -71,3 +71,4 @@ gem "jquery-rails"
 gem "jsbundling-rails", "~> 1.3"
 gem 'rubocop'
 gem 'rubocop-rails'
+gem "aws-sdk-s3", "~> 1.0"

@@ -2,19 +2,11 @@ require "faker"
 
 puts "Seeding..."
 
-# -------------------------------------------------------
-# Admin User
-# -------------------------------------------------------
 AdminUser.create!(
   email: "admin@example.com",
   password: "password",
   password_confirmation: "password"
 ) if AdminUser.count == 0
-
-
-# -------------------------------------------------------
-# Create Categories
-# -------------------------------------------------------
 
 category_names = [
   "Mechanical Keyboards",
@@ -30,11 +22,6 @@ category_names.each do |name|
 end
 
 puts "Categories created."
-
-
-# -------------------------------------------------------
-# Seed Product Themes
-# -------------------------------------------------------
 
 PHYSICAL_KEYBOARD_NAMES = [
   "Keychron K8", "Keychron K6", "Akko 3068B", "GMMK Pro",
@@ -74,18 +61,16 @@ DIGITAL_ASSETS = [
 ]
 
 
-# -------------------------------------------------------
-# Manual Featured Products
-# -------------------------------------------------------
-
 manual_products = [
   {
     name: "Keychron K8 Pro Mechanical Keyboard",
     description: "Wireless mechanical keyboard with hot-swappable switches.",
-        base_price: 119.99,
+    base_price: 119.99,
     stock_quantity: 50,
     product_type: "physical",
-    category_id: categories["Mechanical Keyboards"].id
+    category_id: categories["Mechanical Keyboards"].id,
+    on_sale: false,
+    featured: true
   },
   {
     name: "Logitech MX Master 3S",
@@ -93,7 +78,9 @@ manual_products = [
     base_price: 99.99,
     stock_quantity: 80,
     product_type: "physical",
-    category_id: categories["Mice"].id
+    category_id: categories["Mice"].id,
+    on_sale: false,
+    featured: false
   },
   {
     name: "ErgoLift Laptop Stand",
@@ -101,7 +88,9 @@ manual_products = [
     base_price: 49.99,
     stock_quantity: 60,
     product_type: "physical",
-    category_id: categories["Workspace"].id
+    category_id: categories["Workspace"].id,
+    on_sale: true,
+    featured: false
   },
   {
     name: "NeoWave Desk Mat",
@@ -109,7 +98,9 @@ manual_products = [
     base_price: 29.99,
     stock_quantity: 100,
     product_type: "physical",
-    category_id: categories["Workspace"].id
+    category_id: categories["Workspace"].id,
+    on_sale: false,
+    featured: false
   },
   {
     name: "Elgato Developer Lighting Kit",
@@ -117,17 +108,21 @@ manual_products = [
     base_price: 149.99,
     stock_quantity: 20,
     product_type: "physical",
-    category_id: categories["Lighting"].id
+    category_id: categories["Lighting"].id,
+    on_sale: false,
+    featured: true
   },
   {
     name: "Rails Starter Kit Pro",
     description: "Premium Rails boilerplate with authentication and admin UI.",
     base_price: 59.99,
-    stock_quantity: 9999, # unlimited digital
+    stock_quantity: 9999,
     product_type: "digital",
     digital_file_url: "/downloads/rails_kit.zip",
     digital_file_size: 35,
-    category_id: categories["Digital"].id
+    category_id: categories["Digital"].id,
+    on_sale: false,
+    featured: true
   },
   {
     name: "JavaScript UI Components Pack",
@@ -137,7 +132,9 @@ manual_products = [
     product_type: "digital",
     digital_file_url: "/downloads/js_components.zip",
     digital_file_size: 24,
-    category_id: categories["Digital"].id
+    category_id: categories["Digital"].id,
+    on_sale: false,
+    featured: false
   },
   {
     name: "DevIcon Pack 2025",
@@ -147,7 +144,9 @@ manual_products = [
     product_type: "digital",
     digital_file_url: "/downloads/iconpack.zip",
     digital_file_size: 12,
-    category_id: categories["Digital"].id
+    category_id: categories["Digital"].id,
+    on_sale: true,
+    featured: false
   },
   {
     name: "Full-Stack Web Dev PDF Textbook",
@@ -157,7 +156,9 @@ manual_products = [
     product_type: "digital",
     digital_file_url: "/downloads/textbook.pdf",
     digital_file_size: 55,
-    category_id: categories["Digital"].id
+    category_id: categories["Digital"].id,
+    on_sale: false,
+    featured: false
   },
   {
     name: "Ultimate Wireframe UX Kit",
@@ -167,7 +168,9 @@ manual_products = [
     product_type: "digital",
     digital_file_url: "/downloads/wireframekit.zip",
     digital_file_size: 40,
-    category_id: categories["Digital"].id
+    category_id: categories["Digital"].id,
+    on_sale: false,
+    featured: true
   }
 ]
 
@@ -175,10 +178,6 @@ manual_products.each { |p| Product.create!(p) }
 
 puts "Manual products created."
 
-
-# -------------------------------------------------------
-# Generate 100 Random Products Using Faker
-# -------------------------------------------------------
 
 100.times do
   category = categories.values.sample
@@ -188,22 +187,18 @@ puts "Manual products created."
     product_name = (PHYSICAL_KEYBOARD_NAMES + KEYCAP_SETS).sample
     product_type = "physical"
     base_price = rand(40..180)
-
   when "Mice"
     product_name = DEV_MICE.sample
     product_type = "physical"
     base_price = rand(30..150)
-
   when "Workspace"
     product_name = WORKSPACE_ITEMS.sample
     product_type = "physical"
     base_price = rand(20..120)
-
   when "Lighting"
     product_name = LIGHTING_ITEMS.sample
     product_type = "physical"
     base_price = rand(20..200)
-
   when "Digital"
     product_name = DIGITAL_ASSETS.sample
     product_type = "digital"
@@ -218,8 +213,21 @@ puts "Manual products created."
     product_type: product_type,
     digital_file_url: product_type == "digital" ? "/downloads/#{Faker::Lorem.word}.zip" : nil,
     digital_file_size: product_type == "digital" ? rand(10..120) : nil,
-    category_id: category.id
+    category_id: category.id,
+
+    on_sale: [true, false].sample,
+    featured: [true, false].sample
   )
+end
+
+Page.find_or_create_by(slug: "about") do |p|
+  p.title = "About Us"
+  p.content = "Write something about your company here..."
+end
+
+Page.find_or_create_by(slug: "contact") do |p|
+  p.title = "Contact Us"
+  p.content = "Add your contact information here..."
 end
 
 puts "Seed complete!"

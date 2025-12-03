@@ -26,6 +26,11 @@ Rails.application.routes.draw do
   post "cart/increase/:id",  to: "cart#increase", as: "cart_increase"
   post "cart/decrease/:id",  to: "cart#decrease", as: "cart_decrease"
 
+  get "/pages/:slug", to: "pages#show", as: :page
+  get "/about",   to: "pages#show", defaults: { slug: "about" },   as: :about
+  get "/contact", to: "pages#show", defaults: { slug: "contact" }, as: :contact
+
+
   resource :checkout, only: [] do
     get :address
     post :address
@@ -36,6 +41,5 @@ Rails.application.routes.draw do
   get "checkout", to: "checkout#index"
   post "checkout/confirm", to: "checkout#confirm"
   post "checkout/complete", to: "checkout#complete"
-
 
 end
