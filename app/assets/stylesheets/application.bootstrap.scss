@@ -1,18 +1,11 @@
-// Load variables BEFORE Bootstrap to override theme colors
 @import "variables";
-
-// Load Bootstrap
 @import "bootstrap";
-
-// Custom styling
 @import "typography";
 @import "navbar";
 @import "buttons";
 @import "forms";
 @import "cards";
 @import "utilities";
-
-// Components
 @import "components/badges";
 @import "components/alerts";
 @import "components/status";

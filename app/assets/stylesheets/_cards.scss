@@ -4,11 +4,33 @@
   border-radius: $radius;
   padding: $padding-base;
   transition: transform $transition, background $transition;
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto;
+
   &:hover {
     background: $background-gray;
     transform: translateY(-4px);
   }
-  .title { color: $dark-gray; font-weight: 700; }
-  .description { color: $medium-gray; }
-  .price { color: $primary-blue; font-weight: 700; }
+
+  .title {
+    color: $dark-gray;
+    font-weight: 700;
+  }
+
+  .description {
+    color: $medium-gray;
+  }
+
+  .price {
+    color: $primary-blue;
+    font-weight: 700;
+  }
+}
+
+.products-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
 }
