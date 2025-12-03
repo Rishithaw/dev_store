@@ -1,12 +1,11 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :province
-  belongs_to :shipping_province, class_name: "Province", foreign_key: "shipping_province_id"
-  has_many :order_items, dependent: :destroy
+  has_many :order_products, dependent: :destroy
 
   STATUSES = %w[pending paid shipped completed].freeze
 
-  validates :user_id, :province_id, :shipping_province_id, presence: true
+  validates :user_id, :province_id, presence: true
   validates :status, presence: true, inclusion: { in: STATUSES }
   validates :subtotal, :gst, :pst, :hst, :total,
             numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
@@ -19,12 +18,12 @@ class Order < ApplicationRecord
   before_save :calculate_totals
 
   def calculate_totals
-    self.subtotal = order_items.sum(&:line_total)
+    self.subtotal = order_products.sum(&:line_total)
 
-    if shipping_province.present?
-      self.gst = subtotal * (shipping_province.gst || 0)
-      self.pst = subtotal * (shipping_province.pst || 0)
-      self.hst = subtotal * (shipping_province.hst || 0)
+    if province.present?
+      self.gst = subtotal * (province.gst || 0)
+      self.pst = subtotal * (province.pst || 0)
+      self.hst = subtotal * (province.hst || 0)
     else
       self.gst = self.pst = self.hst = 0
     end

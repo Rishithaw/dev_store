@@ -7,7 +7,6 @@ class CheckoutsController < ApplicationController
   def address
     @address = current_user.addresses.find_by(is_default: true) ||
                current_user.addresses.build
-
     @provinces = Province.all
   end
 
@@ -27,7 +26,7 @@ class CheckoutsController < ApplicationController
 
   def review
     @address = current_user.addresses.find_by(is_default: true)
-    @cart_items = @cart_items # already loaded
+    @cart_items = @cart_items
   end
 
   def confirm
@@ -38,7 +37,6 @@ class CheckoutsController < ApplicationController
     @gst      = @subtotal * (province.gst || 0)
     @pst      = @subtotal * (province.pst || 0)
     @hst      = @subtotal * (province.hst || 0)
-
     @total    = @subtotal + @gst + @pst + @hst
   end
 
@@ -50,7 +48,6 @@ class CheckoutsController < ApplicationController
       order = current_user.orders.create!(
         status: "pending",
         province: province,
-        shipping_province: province,
         shipping_street: address.street,
         shipping_city: address.city,
         shipping_postal_code: address.postal_code,
@@ -60,7 +57,7 @@ class CheckoutsController < ApplicationController
       @cart.each do |product_id, qty|
         product = Product.find(product_id)
 
-        order.order_items.create!(
+        order.order_products.create!(
           product: product,
           quantity: qty,
           product_price_at_purchase: product.price,
@@ -86,9 +83,7 @@ class CheckoutsController < ApplicationController
   end
 
   def ensure_cart_not_empty
-    if @cart.blank?
-      redirect_to products_path, alert: "Your cart is empty."
-    end
+    redirect_to products_path, alert: "Your cart is empty." if @cart.blank?
   end
 
   def address_params
