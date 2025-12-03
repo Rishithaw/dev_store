@@ -11,10 +11,42 @@
 }
 
 .card-shadow {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 16px #0000000a;
   border-radius: $radius;
 }
 
 .muted {
   color: $light-gray;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.breadcrumb-item {
+  display: inline-block;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  padding: 0 6px;
+  color: #888;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: highlight current page */
+.breadcrumb-item.active {
+  font-weight: bold;
+  color: #333;
 }
