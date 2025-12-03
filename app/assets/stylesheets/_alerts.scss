@@ -1,0 +1,12 @@
+.alert-success-custom {
+  background: rgba($success-green, 0.08);
+  border-left: 4px solid $success-green;
+  color: $medium-gray;
+  padding: 0.75rem 1rem;
+}
+
+.alert-danger-custom {
+  background: rgba($danger-red, 0.08);
+  border-left: 4px solid $danger-red;
+  color: $medium-gray;
+}

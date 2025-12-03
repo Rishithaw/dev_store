@@ -1,0 +1,20 @@
+.text-body {
+  color: $medium-gray;
+}
+
+.bg-off-white {
+  background: $off-white;
+}
+
+.container {
+  max-width: 1100px;
+}
+
+.card-shadow {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  border-radius: $radius;
+}
+
+.muted {
+  color: $light-gray;
+}

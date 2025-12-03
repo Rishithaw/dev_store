@@ -2,25 +2,13 @@
   background: $white;
   border: 1px solid $border-gray;
   border-radius: $radius;
-  transition: $transition;
   padding: $padding-base;
-
+  transition: transform $transition, background $transition;
   &:hover {
     background: $background-gray;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
   }
-
-  .title {
-    color: $dark-gray;
-    font-weight: 600;
-  }
-
-  .description {
-    color: $medium-gray;
-  }
-
-  .price {
-    color: $primary-blue;
-    font-weight: bold;
-  }
+  .title { color: $dark-gray; font-weight: 700; }
+  .description { color: $medium-gray; }
+  .price { color: $primary-blue; font-weight: 700; }
 }

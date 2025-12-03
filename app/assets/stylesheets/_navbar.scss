@@ -1,0 +1,28 @@
+.navbar {
+  background: $white;
+  border-bottom: 1px solid $border-gray;
+  .navbar-brand {
+    color: $dark-gray;
+    &:hover { color: $primary-blue; text-decoration: none; }
+  }
+
+  .nav-link {
+    color: $dark-gray;
+    transition: $transition;
+    &:hover {
+      background: $background-gray;
+      color: $primary-blue;
+      border-radius: 6px;
+    }
+  }
+
+  .btn {
+    border-radius: $radius;
+  }
+
+  // active link
+  .nav-link.active {
+    color: $primary-blue !important;
+    font-weight: 600;
+  }
+}
