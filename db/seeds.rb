@@ -230,4 +230,28 @@ Page.find_or_create_by(slug: "contact") do |p|
   p.content = "Add your contact information here..."
 end
 
+puts "Creating provinces..."
+
+provinces = [
+  { name: "Alberta", abbreviation: "AB", gst: 0.05, pst: 0.0, hst: 0.0 },
+  { name: "British Columbia", abbreviation: "BC", gst: 0.05, pst: 0.07, hst: 0.0 },
+  { name: "Manitoba", abbreviation: "MB", gst: 0.05, pst: 0.07, hst: 0.0 },
+  { name: "New Brunswick", abbreviation: "NB", gst: 0.0, pst: 0.0, hst: 0.15 },
+  { name: "Newfoundland and Labrador", abbreviation: "NL", gst: 0.0, pst: 0.0, hst: 0.15 },
+  { name: "Northwest Territories", abbreviation: "NT", gst: 0.05, pst: 0.0, hst: 0.0 },
+  { name: "Nova Scotia", abbreviation: "NS", gst: 0.0, pst: 0.0, hst: 0.15 },
+  { name: "Nunavut", abbreviation: "NU", gst: 0.05, pst: 0.0, hst: 0.0 },
+  { name: "Ontario", abbreviation: "ON", gst: 0.0, pst: 0.0, hst: 0.13 },
+  { name: "Prince Edward Island", abbreviation: "PE", gst: 0.0, pst: 0.0, hst: 0.15 },
+  { name: "Quebec", abbreviation: "QC", gst: 0.05, pst: 0.09975, hst: 0.0 },
+  { name: "Saskatchewan", abbreviation: "SK", gst: 0.05, pst: 0.06, hst: 0.0 },
+  { name: "Yukon", abbreviation: "YT", gst: 0.05, pst: 0.0, hst: 0.0 }
+]
+
+provinces.each do |p|
+  Province.create!(p)
+end
+
+puts "Provinces created."
+
 puts "Seed complete!"
