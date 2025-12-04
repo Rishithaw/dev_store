@@ -67,14 +67,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  # Strong params
   def order_params
     params.require(:order).permit(
       :total_price,
       :status,
       :shipping_address,
-      :billing_address,
-      # Add other fields based on your schema
+      :billing_address
     )
   end
 end
